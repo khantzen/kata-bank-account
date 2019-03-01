@@ -16,14 +16,12 @@ public class DepositOperationStep {
 
     @When("^I deposit (\\d+\\.\\d+) on (\\d+/\\d+/\\d+)$")
     public void makingADeposit(float amount, String date) {
-        Deposit deposit = new Deposit(amount, date);
-        this.bankAccount.applyDeposit(deposit);
+        this.bankAccount.deposit(amount, date);
     }
 
     @When("^I withdrawal (\\d+\\.\\d+) on (\\d+/\\d+/\\d+)$")
     public void makingAWithdrawal(float amount, String date) {
-        Withdrawal withdrawalOperation = new Withdrawal(amount, date);
-        this.bankAccount.applyWithdrawal(withdrawalOperation);
+        this.bankAccount.withdrawal(amount, date);
     }
 
     @Then("^bank account balance should be (-*\\d+\\.\\d+)$")
