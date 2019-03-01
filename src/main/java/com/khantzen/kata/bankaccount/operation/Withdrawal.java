@@ -1,9 +1,9 @@
 package com.khantzen.kata.bankaccount.operation;
 
-public class DepositOperation {
+public class Withdrawal {
     private float amount;
 
-    public DepositOperation(float amount, String depositDate) {
+    public Withdrawal(float amount, String date) {
         this.amount = amount;
     }
 
