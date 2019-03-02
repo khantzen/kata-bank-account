@@ -1,17 +1,17 @@
 package com.khantzen.kata.bankaccount.operation;
 
-import com.khantzen.kata.bankaccount.model.BankAccount;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import org.assertj.core.api.Assertions;
 
-public class DepositOperationStep {
+public class BankAccountStep {
     private BankAccount bankAccount;
+    private String history;
 
-    @Given("^a bank account$")
-    public void implementDefaultBankAccount() throws Throwable {
-      this.bankAccount = new BankAccount();
+    @Given("^a bank account with (\\d+\\.\\d+)$")
+    public void a_bank_account_with(float amount) throws Throwable {
+        this.bankAccount = new BankAccount(amount);
     }
 
     @When("^I deposit (\\d+\\.\\d+) on (\\d+/\\d+/\\d+)$")
@@ -25,8 +25,18 @@ public class DepositOperationStep {
     }
 
     @Then("^bank account balance should be (-*\\d+\\.\\d+)$")
-    public void i_should_have_balance_on_my_account(float expectedBankAccountBalance) throws Throwable {
+    public void checkAccountBalanceIs(float expectedBankAccountBalance) throws Throwable {
         float bankAccountBalance = this.bankAccount.getBalance();
         Assertions.assertThat(bankAccountBalance).isEqualTo(expectedBankAccountBalance);
+    }
+
+    @When("^I ask for my bank account operation history$")
+    public void getOperationHistory() throws Throwable {
+        this.history = this.bankAccount.getHistory();
+    }
+
+    @Then("^I should have$")
+    public void checkOperationHistoryIs(String expectedHistory) throws Throwable {
+        Assertions.assertThat(this.history).isEqualTo(expectedHistory);
     }
 }
