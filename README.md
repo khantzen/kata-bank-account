@@ -10,7 +10,9 @@ This is my bank account kata
 ### How to run
 
 ```shell
-gradle task run...
+git clone https://github.com/khantzen/kata-bank-account.git
+cd kata-bank-account
+gradle run
 ```
 
 ### Statement
