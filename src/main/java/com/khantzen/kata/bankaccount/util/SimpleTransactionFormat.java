@@ -6,19 +6,19 @@ import java.util.Date;
 
 public class SimpleTransactionFormat {
     private final String datePattern;
-    private final int amountLengthSection;
-    private final int balanceLengthSection;
+    private final int amountSectionLength;
+    private final int balanceSectionLength;
 
-    public SimpleTransactionFormat(String datePattern, int amountLengthSection, int balanceLengthSection) {
+    public SimpleTransactionFormat(String datePattern, int amountSectionLength, int balanceSectionLength) {
         this.datePattern = datePattern;
-        this.amountLengthSection = amountLengthSection;
-        this.balanceLengthSection = balanceLengthSection;
+        this.amountSectionLength = amountSectionLength;
+        this.balanceSectionLength = balanceSectionLength;
     }
 
     public String buildHeader() {
         String headerDate = "|" + this.getHeaderSectionFor("Date", 12);
-        String headerAmount = this.getHeaderSectionFor("Amount", this.amountLengthSection);
-        String headerBalance = this.getHeaderSectionFor("Balance", this.balanceLengthSection);
+        String headerAmount = this.getHeaderSectionFor("Amount", this.amountSectionLength);
+        String headerBalance = this.getHeaderSectionFor("Balance", this.balanceSectionLength);
         return headerDate + headerAmount + headerBalance;
     }
 
@@ -46,18 +46,19 @@ public class SimpleTransactionFormat {
 
     private String getTransactionAmountAsString(Transaction transaction) {
         float amount = transaction.getAmount();
-        return formatValueToString(amount, this.amountLengthSection);
+        return formatValueToString(amount, this.amountSectionLength);
     }
 
     private String getTransactionBalanceAsString(Transaction transaction) {
         float balance = transaction.getBalance();
-        return formatValueToString(balance, this.balanceLengthSection);
+        return formatValueToString(balance, this.balanceSectionLength);
     }
 
     private String formatValueToString(float amount, int sectionLength) {
         String sign = amount > 0 ? "+" : "";
 
-        StringBuilder amountAsString = new StringBuilder(" " + sign + amount);
+        String truncatedAmount = String.format("%.2f", amount);
+        StringBuilder amountAsString = new StringBuilder(" " + sign + truncatedAmount);
 
         while (amountAsString.length() < sectionLength) {
             amountAsString.append(" ");

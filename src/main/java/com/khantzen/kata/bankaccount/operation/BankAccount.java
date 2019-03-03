@@ -20,24 +20,20 @@ public class BankAccount {
         this.registerTransactionInHistory(amountToRemove, date);
     }
 
+    private void applyTransaction(float amount) {
+        this.balance += amount;
+    }
+
     private void registerTransactionInHistory(float amount, String date) {
         Transaction transaction = new Transaction(amount, date, this.balance);
         this.history.appendTransaction(transaction);
     }
 
-    private void applyTransaction(float amount) {
-        this.balance += amount;
+    public void printHistory() {
+        this.history.print();
     }
 
     public float getBalance() {
         return balance;
-    }
-
-    public void printHistory() {
-        System.out.println(this.getHistory());
-    }
-
-    String getHistory() {
-        return null;
     }
 }

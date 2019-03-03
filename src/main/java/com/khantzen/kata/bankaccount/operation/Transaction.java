@@ -7,7 +7,7 @@ import java.util.Date;
 import java.util.Optional;
 
 public class Transaction {
-    private static final String TRANSACTION_DATE_FORMAT = "yyyy/MM/dd";
+    public static final String TRANSACTION_DATE_FORMAT = "yyyy/MM/dd";
 
     private final float amount;
     private final Date date;
