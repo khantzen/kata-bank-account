@@ -9,8 +9,8 @@ public class TransactionFormatTest {
 
     @Test
     public void buildTransactionHeader_test() {
-        SimpleTransactionFormat transactionFormat =
-                new SimpleTransactionFormat("yyyy/MM/dd", 10, 10);
+        TransactionFormat transactionFormat =
+                new TransactionFormat("yyyy/MM/dd", 10, 10);
 
         String header = transactionFormat.buildHeader();
 
@@ -19,8 +19,8 @@ public class TransactionFormatTest {
 
     @Test
     public void formatDepositTransaction_test() {
-        SimpleTransactionFormat transactionFormat =
-                new SimpleTransactionFormat("yyyy/MM/dd", 10, 15);
+        TransactionFormat transactionFormat =
+                new TransactionFormat("yyyy/MM/dd", 10, 15);
 
         Amount amount = new Amount(125.25f);
         Amount balance = new Amount(987.26f);
@@ -32,8 +32,8 @@ public class TransactionFormatTest {
 
     @Test
     public void formatWithdrawalTransaction_test() {
-        SimpleTransactionFormat transactionFormat =
-                new SimpleTransactionFormat("yyyy/MM/dd", 9, 12);
+        TransactionFormat transactionFormat =
+                new TransactionFormat("yyyy/MM/dd", 9, 12);
 
         Amount amount = new Amount(-125.25f);
         Amount balance = new Amount(987.26f);
