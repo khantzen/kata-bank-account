@@ -11,6 +11,12 @@ repositories {
     mavenCentral()
 }
 
+task run(type: JavaExec) {
+    description = "Run Bank Account demo"
+    main = 'com.khantzen.kata.bankaccount.BankAccountMain'
+    classpath = sourceSets.main.runtimeClasspath
+}
+
 dependencies {
     testCompile group: 'info.cukes', name: 'cucumber-java', version: '1.2.5'
     testCompile group: 'info.cukes', name: 'cucumber-junit', version: '1.2.5'
