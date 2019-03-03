@@ -8,11 +8,11 @@ public class Amount {
         this.value = initialAmount;
     }
 
-    public float getValue() {
+    float getValue() {
         return value;
     }
 
-    public Amount add(Amount amount) {
+    Amount add(Amount amount) {
         return new Amount(value + amount.value);
     }
 
@@ -28,19 +28,19 @@ public class Amount {
         return String.format("%.2f", value);
     }
 
-    public static int compareLength(Amount am1, Amount am2) {
+    static int compareLength(Amount am1, Amount am2) {
         Integer am1Length = am1.length();
         Integer am2Length = am2.length();
         return am1Length - am2Length;
     }
 
-    public Integer length() {
+    Integer length() {
         Amount absoluteAmount = this.abs();
         String truncatedAmount = absoluteAmount.amountValueToString();
         return truncatedAmount.length();
     }
 
-    public Amount abs() {
+    private Amount abs() {
         return new Amount(Math.abs(value));
     }
 }

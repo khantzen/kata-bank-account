@@ -34,11 +34,7 @@ public class BankAccount {
         this.history.print();
     }
 
-    public Amount getBalance() {
-        return balance;
-    }
-
-    public float getBalanceValue() {
+    float getBalanceValue() {
         return balance.getValue();
     }
 }

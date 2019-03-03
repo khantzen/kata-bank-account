@@ -48,7 +48,6 @@ class History {
     }
 
     /**
-     *
      * @return the length for the Amount case when printing history
      */
     int getAmountCaseLength() {
@@ -56,7 +55,6 @@ class History {
     }
 
     /**
-     *
      * @return the length for the Balance case when printing history
      */
     int getBalanceSectionLength() {
