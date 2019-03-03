@@ -18,8 +18,8 @@ Feature: Bank account features
     When I ask for my bank account operation history
     Then I should have
     """
-    Date       |   Amount  | Balance
-    2020/04/02 | + 745.28  | 2406.52
-    2019/03/01 | + 1423.35 | 1661.24
-    2017/02/23 | - 542.36  |  237.89
+    | Date       |  Amount  | Balance  |
+    | 2020/04/02 | +745.28  | +2406.52 |
+    | 2019/03/01 | +1423.35 | +1661.24 |
+    | 2017/02/23 | -542.36  | +237.89  |
     """
