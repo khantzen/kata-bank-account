@@ -5,7 +5,16 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Optional;
 
+/**
+ * DateConverter is a class allowing to parse and format strict date following a given pattern
+ */
 public class DateConverter {
+    /**
+     *
+     * @param date string containing date to parse
+     * @param pattern pattern to parse the date
+     * @return convert the given string into an Optional Date
+     */
     public static Optional<Date> convertStringUsingFormat(String date, String pattern) {
         SimpleDateFormat dateFormatter = buildStrictDateFormatterFrom(pattern);
 
@@ -17,7 +26,13 @@ public class DateConverter {
         }
     }
 
-    public static String convertDateToString(Date date, String pattern) {
+    /**
+     *
+     * @param date the Date that with want to format into a string
+     * @param pattern The string pattern that we want for our date
+     * @return A string containing the formatted Date
+     */
+    static String convertDateToString(Date date, String pattern) {
         SimpleDateFormat dateFormatter = buildStrictDateFormatterFrom(pattern);
         return dateFormatter.format(date);
     }
