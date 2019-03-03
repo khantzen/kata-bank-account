@@ -7,6 +7,16 @@ import org.junit.Test;
 public class TransactionFormatTest {
 
     @Test
+    public void buildTransactionHeader_test() {
+        SimpleTransactionFormat transactionFormat =
+                new SimpleTransactionFormat("yyyy/MM/dd", 10, 10);
+
+        String header = transactionFormat.buildHeader();
+
+        Assertions.assertThat(header).isEqualTo("| Date       | Amount   | Balance  |");
+    }
+
+    @Test
     public void formatDepositTransaction_test() {
         SimpleTransactionFormat transactionFormat =
                 new SimpleTransactionFormat("yyyy/MM/dd", 10, 15);

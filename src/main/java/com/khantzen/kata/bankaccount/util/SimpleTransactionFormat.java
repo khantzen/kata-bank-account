@@ -15,6 +15,22 @@ public class SimpleTransactionFormat {
         this.balanceLengthSection = balanceLengthSection;
     }
 
+    public String buildHeader() {
+        String headerDate = "|" + this.getHeaderSectionFor("Date", 12);
+        String headerAmount = this.getHeaderSectionFor("Amount", this.amountLengthSection);
+        String headerBalance = this.getHeaderSectionFor("Balance", this.balanceLengthSection);
+        return headerDate + headerAmount + headerBalance;
+    }
+
+    private String getHeaderSectionFor(String name, int length) {
+        StringBuilder headerSection = new StringBuilder(" " + name);
+        while (headerSection.length() < length) {
+            headerSection.append(" ");
+        }
+        headerSection.append("|");
+        return headerSection.toString();
+    }
+
     public String format(Transaction transaction) {
         String formattedTransactionDate = getTransactionDateAsString(transaction);
         String formattedTransactionAmount = getTransactionAmountAsString(transaction);
