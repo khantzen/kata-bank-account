@@ -4,7 +4,6 @@ import com.khantzen.kata.bankaccount.util.SimpleTransactionFormat;
 
 import java.util.*;
 import java.util.function.Function;
-import java.util.stream.Collectors;
 
 public class History {
     private static int DEFAULT_SECTION_LENGTH = 10;
@@ -51,12 +50,13 @@ public class History {
         return this.getTransactionSectionLengthFor(Transaction::getBalance);
     }
 
-    private int getTransactionSectionLengthFor(Function<Transaction, Float> getAmount) {
-        Optional<String> longestValue = transactionList.stream()
-                .map(getAmount)
-                .map(Math::abs)
-                .map(val -> String.format("%.2f", val)).max(Comparator.comparing(String::length));
+    private int getTransactionSectionLengthFor(Function<Transaction, Amount> getValue) {
+        Optional<Amount> longestAmount = transactionList.stream()
+                .map(getValue)
+                .max(Amount::compareLength);
 
-        return longestValue.map(s -> s.length() + 3).orElse(DEFAULT_SECTION_LENGTH);
+        Amount a = longestAmount.get();
+
+        return longestAmount.map(s -> s.length() + 3).orElse(DEFAULT_SECTION_LENGTH);
     }
 }

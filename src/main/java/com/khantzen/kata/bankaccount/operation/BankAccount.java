@@ -1,30 +1,31 @@
 package com.khantzen.kata.bankaccount.operation;
 
 public class BankAccount {
-    private float balance;
+    private Amount balance;
     private History history;
 
     public BankAccount(float initialAmount) {
-        this.balance = initialAmount;
+        this.balance = new Amount(initialAmount);
         this.history = new History();
     }
 
     public void deposit(float amount, String date) {
-        this.applyTransaction(amount);
-        this.registerTransactionInHistory(amount, date);
+        Amount depositAmount = new Amount(amount);
+        this.applyTransaction(depositAmount);
+        this.registerTransactionInHistory(depositAmount, date);
     }
 
     public void withdrawal(float amount, String date) {
-        float amountToRemove = -amount;
-        this.applyTransaction(amountToRemove);
-        this.registerTransactionInHistory(amountToRemove, date);
+        Amount withdrawalAmount = new Amount(-amount);
+        this.applyTransaction(withdrawalAmount);
+        this.registerTransactionInHistory(withdrawalAmount, date);
     }
 
-    private void applyTransaction(float amount) {
-        this.balance += amount;
+    private void applyTransaction(Amount amount) {
+        this.balance = this.balance.add(amount);
     }
 
-    private void registerTransactionInHistory(float amount, String date) {
+    private void registerTransactionInHistory(Amount amount, String date) {
         Transaction transaction = new Transaction(amount, date, this.balance);
         this.history.appendTransaction(transaction);
     }
@@ -33,7 +34,11 @@ public class BankAccount {
         this.history.print();
     }
 
-    public float getBalance() {
+    public Amount getBalance() {
         return balance;
+    }
+
+    public float getBalanceValue() {
+        return balance.getValue();
     }
 }

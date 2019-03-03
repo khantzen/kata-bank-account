@@ -7,13 +7,13 @@ import java.util.Date;
 import java.util.Optional;
 
 public class Transaction {
-    public static final String TRANSACTION_DATE_FORMAT = "yyyy/MM/dd";
+    static final String TRANSACTION_DATE_FORMAT = "yyyy/MM/dd";
 
-    private final float amount;
+    private final Amount amount;
     private final Date date;
-    private final float balance;
+    private final Amount balance;
 
-    public Transaction(float amount, String date, float balance) {
+    public Transaction(Amount amount, String date, Amount balance) {
         this.amount = amount;
         this.date = getTransactionDate(date);
         this.balance = balance;
@@ -25,7 +25,7 @@ public class Transaction {
         return transactionDate.orElse(currentDate);
     }
 
-    public float getAmount() {
+    public Amount getAmount() {
         return amount;
     }
 
@@ -33,7 +33,7 @@ public class Transaction {
         return date;
     }
 
-    public float getBalance() {
+    public Amount getBalance() {
         return balance;
     }
 }

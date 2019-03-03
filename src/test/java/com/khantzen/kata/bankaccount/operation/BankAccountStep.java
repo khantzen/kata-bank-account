@@ -35,7 +35,7 @@ public class BankAccountStep {
 
     @Then("^bank account balance should be (-*\\d+\\.\\d+)$")
     public void checkAccountBalanceIs(float expectedBankAccountBalance) throws Throwable {
-        float bankAccountBalance = this.bankAccount.getBalance();
+        float bankAccountBalance = this.bankAccount.getBalanceValue();
         Assertions.assertThat(bankAccountBalance).isEqualTo(expectedBankAccountBalance);
     }
 

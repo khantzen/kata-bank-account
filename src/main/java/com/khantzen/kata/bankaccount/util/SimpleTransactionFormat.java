@@ -1,5 +1,6 @@
 package com.khantzen.kata.bankaccount.util;
 
+import com.khantzen.kata.bankaccount.operation.Amount;
 import com.khantzen.kata.bankaccount.operation.Transaction;
 
 import java.util.Date;
@@ -45,26 +46,23 @@ public class SimpleTransactionFormat {
     }
 
     private String getTransactionAmountAsString(Transaction transaction) {
-        float amount = transaction.getAmount();
+        Amount amount = transaction.getAmount();
         return formatValueToString(amount, this.amountSectionLength);
     }
 
     private String getTransactionBalanceAsString(Transaction transaction) {
-        float balance = transaction.getBalance();
+        Amount balance = transaction.getBalance();
         return formatValueToString(balance, this.balanceSectionLength);
     }
 
-    private String formatValueToString(float amount, int sectionLength) {
-        String sign = amount > 0 ? "+" : "";
+    private String formatValueToString(Amount amount, int sectionLength) {
+        StringBuilder stringBuilder = new StringBuilder(" " + amount);
 
-        String truncatedAmount = String.format("%.2f", amount);
-        StringBuilder amountAsString = new StringBuilder(" " + sign + truncatedAmount);
-
-        while (amountAsString.length() < sectionLength) {
-            amountAsString.append(" ");
+        while (stringBuilder.length() < sectionLength) {
+            stringBuilder.append(" ");
         }
 
-        return amountAsString.toString();
+        return stringBuilder.toString();
     }
 
     private String buildTransactionString(String date, String amount, String balance) {
