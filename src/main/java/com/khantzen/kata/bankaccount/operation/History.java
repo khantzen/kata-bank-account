@@ -1,51 +1,64 @@
 package com.khantzen.kata.bankaccount.operation;
 
-import com.khantzen.kata.bankaccount.util.SimpleTransactionFormat;
+import com.khantzen.kata.bankaccount.util.TransactionFormat;
 
 import java.util.*;
 import java.util.function.Function;
 
-public class History {
-    private static int DEFAULT_SECTION_LENGTH = 10;
-
+/**
+ * History class contains all the transaction that have been made to our bank account
+ */
+class History {
     private List<Transaction> transactionList;
 
-    public History() {
+    History() {
         this.transactionList = new ArrayList<>();
     }
 
-    public void appendTransaction(Transaction transaction) {
+    void appendTransaction(Transaction transaction) {
         this.transactionList.add(transaction);
     }
 
-    public void print() {
-        int amountSectionLength = this.getAmountSectionLength();
+    /**
+     * print method will use TransactionFormat util class to print a well formatted transaction history
+     */
+    void print() {
+        int amountSectionLength = this.getAmountCaseLength();
         int balanceSectionLength = this.getBalanceSectionLength();
 
-        SimpleTransactionFormat transactionFormat =
-                new SimpleTransactionFormat(
+        TransactionFormat transactionFormat =
+                new TransactionFormat(
                         Transaction.TRANSACTION_DATE_FORMAT,
                         amountSectionLength,
                         balanceSectionLength
                 );
 
         String historyHeader = transactionFormat.buildHeader();
+
         System.out.println(historyHeader);
         this.printHistoryBody(transactionFormat);
     }
 
 
-    private void printHistoryBody(SimpleTransactionFormat transactionFormat) {
+    private void printHistoryBody(TransactionFormat transactionFormat) {
         this.transactionList.stream()
                 .sorted(Comparator.comparing(Transaction::getDate).reversed())
                 .map(transactionFormat::format)
                 .forEach(System.out::println);
     }
 
-    int getAmountSectionLength() {
+    /**
+     *
+     * @return the length for the Amount case when printing history
+     */
+    int getAmountCaseLength() {
         return this.getTransactionSectionLengthFor(Transaction::getAmount);
     }
 
+    /**
+     *
+     * @return the length for the Balance case when printing history
+     */
     int getBalanceSectionLength() {
         return this.getTransactionSectionLengthFor(Transaction::getBalance);
     }
@@ -55,8 +68,6 @@ public class History {
                 .map(getValue)
                 .max(Amount::compareLength);
 
-        Amount a = longestAmount.get();
-
-        return longestAmount.map(s -> s.length() + 3).orElse(DEFAULT_SECTION_LENGTH);
+        return longestAmount.map(s -> s.length() + 3).orElse(10);
     }
 }

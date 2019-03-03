@@ -12,7 +12,7 @@ public class HistoryPrintingTest {
         history.appendTransaction(new Transaction(new Amount(-1255.73f), "2017/02/02", new Amount(1.00f)));
         history.appendTransaction(new Transaction(new Amount(125.25f), "2018/02/02", new Amount(1.00f)));
 
-        int amountSectionLength = history.getAmountSectionLength();
+        int amountSectionLength = history.getAmountCaseLength();
 
         Assertions.assertThat(amountSectionLength).isEqualTo(10);
     }
